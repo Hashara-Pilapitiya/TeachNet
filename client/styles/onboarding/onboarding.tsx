@@ -14,5 +14,19 @@ export const styles = StyleSheet.create({
     logo: {
         width: wp('50%'),
         height: hp('40%'),
+    },
+
+    titleWrapper: {
+        flexDirection: 'row',
+        marginTop: -20
+    },
+
+    subTitle: {
+        marginTop: 10
+    },
+
+    buttonWrapper: {
+        width: wp('92%'),
+        alignItems: 'center',
     }
 })
