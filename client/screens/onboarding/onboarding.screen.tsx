@@ -4,6 +4,7 @@ import { useFonts, Raleway_700Bold } from '@expo-google-fonts/raleway';
 import { Nunito_400Regular, Nunito_700Bold } from '@expo-google-fonts/nunito';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from '../../styles/onboarding/onboarding';
+import { router } from 'expo-router';
 
 export default function OnBoardingScreen() {
 
@@ -41,7 +42,7 @@ export default function OnBoardingScreen() {
 
             </View>
 
-            <TouchableOpacity style={[{marginTop: 50, backgroundColor: '#e67e22', padding: 15, borderRadius: 5}, styles.buttonWrapper]}>
+            <TouchableOpacity style={[{marginTop: 50, backgroundColor: '#e67e22', padding: 15, borderRadius: 5}, styles.buttonWrapper]} onPress={() => router.push('/(routes)/welcome-intro')}>
 
                 <Text style={{fontFamily: 'Nunito_700Bold', color: '#ecf0f1', fontSize: 20}}>Get Started</Text>
 
