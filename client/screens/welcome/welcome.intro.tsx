@@ -38,9 +38,13 @@ export default function WelcomeIntroScreen() {
 
       <View style={{marginTop: 80}}>
 
-        <Image source={{ uri: item.image }} style={styles.slideImage} />
+        <Image source={item.image} style={styles.slideImage} />
 
         <Text style={{fontFamily: 'Nunito_700Bold', fontSize: 24, color: '#2980b9', textAlign: 'center'}}>{item.title}</Text>
+
+        <View style={{marginTop: 15}}>
+          
+        </View>
 
       </View>
 
@@ -58,7 +62,7 @@ export default function WelcomeIntroScreen() {
         router.push('/login')
       }}
       renderNextButton={() => (
-        <View style={commonStyles.buttonContainer}>
+        <View style={[commonStyles.buttonContainer, {paddingBottom: 20}]}>
           <Text style={commonStyles.buttonTxt}>Next</Text>
         </View>
       )}
