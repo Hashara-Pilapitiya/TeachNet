@@ -9,17 +9,17 @@ type onboardingSwiperDataType = {
 export const onboardingSwiperData: onboardingSwiperDataType[] = [
     {
         id: 1,
-        title: 'Welcome to TeachNet - Your Personalized Learning Management System',
+        title: 'Your Personalized Learning Management System',
         description: 'Your personalized learning management system designed to streamline your educational experience. Access courses, track progress, and collaborate with peers effortlessly.',
         shortDescription: ' Streamlined Learning for All.',
-        image: require('../assets/intro1.jpg')
+        image: require('../assets/intro2.jpg')
     },
     {
         id: 2,
         title: 'Access All Your Educational Resources in One Place',
         description: 'This Learning Portal provides a comprehensive platform for all your educational needs. From course materials to interactive learning tools, find everything you need to succeed in one place.',
         shortDescription: 'Your Educational Resource Hub.',
-        image: require('../assets/intro2.jpg')
+        image: require('../assets/intro5.jpg')
     },
     {
         id: 3,
@@ -40,6 +40,6 @@ export const onboardingSwiperData: onboardingSwiperDataType[] = [
         title: 'Elevate Your Skills and Knowledge',
         description: 'TeachNet is where learning and collaboration meet. Engage with interactive content, connect with classmates, and enhance your educational journey.',
         shortDescription: ' Streamlined Learning for All.',
-        image: require('../assets/intro5.jpg')
+        image: require('../assets/intro1.jpg')
     },
 ]
