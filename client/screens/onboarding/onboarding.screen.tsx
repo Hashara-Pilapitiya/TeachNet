@@ -19,7 +19,7 @@ export default function OnBoardingScreen() {
 
   return (
 
-    <LinearGradient colors={['#e5ecf9', '#f6f7f9']} style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <LinearGradient colors={['#e67e22', '#f6f7f9']} style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <View style={styles.firstContainer}>
 
             <View>
@@ -31,6 +31,7 @@ export default function OnBoardingScreen() {
         </View>
 
     </LinearGradient>
+
   )
 }
 
