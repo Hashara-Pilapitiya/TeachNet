@@ -6,6 +6,7 @@ import 'react-native-reanimated';
 
 import { View } from 'react-native';
 import React from 'react';
+import OnBoarding from './(routes)/onboarding';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -41,11 +42,19 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
 
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
   return (
     
-    <View>
+    <>
 
-    </View>
+      {isLoggedIn ? (
+        <View></View>
+      ) : (
+        <OnBoarding />  
+      )}
+
+    </>
     
   );
 }
