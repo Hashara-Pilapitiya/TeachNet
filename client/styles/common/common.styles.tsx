@@ -18,13 +18,13 @@ export const commonStyles = StyleSheet.create({
 
     buttonTxt: {
         color: '#ecf0f1',
-        fontSize: 16,
+        fontSize: 18,
         fontFamily: 'Nunito_700Bold',
         textAlign: 'center'
     },
 
     dotStyle: {
-        backgroundColor: '#e67e22',
+        backgroundColor: '#bdc3c7',
         width: responsiveWidth(2.5),
         height: responsiveWidth(2.5),
         borderRadius: 5,
