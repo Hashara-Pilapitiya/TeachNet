@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 import { useFonts, Raleway_700Bold } from '@expo-google-fonts/raleway';
 import { Nunito_400Regular, Nunito_700Bold } from '@expo-google-fonts/nunito';
 import { LinearGradient } from 'expo-linear-gradient';
+import { styles } from '../../styles/onboarding/onboarding';
 
 export default function OnBoardingScreen() {
 
@@ -17,7 +18,17 @@ export default function OnBoardingScreen() {
     }
 
   return (
+
     <LinearGradient colors={['#e5ecf9', '#f6f7f9']} style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <View style={styles.firstContainer}>
+
+            <View>
+
+                <Image source={require('@/assets/logo.png')} style={styles.logo} />
+
+            </View>
+            
+        </View>
 
     </LinearGradient>
   )
