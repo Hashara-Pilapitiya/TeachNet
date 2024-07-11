@@ -31,6 +31,18 @@ export default function LoginScreen() {
         password: '',
     })
 
+    let [fontsLoaded, fontError] = useFonts({
+        Raleway_700Bold,
+        Nunito_400Regular,
+        Nunito_700Bold,
+        Nunito_600SemiBold,
+        Raleway_600SemiBold
+      });
+    
+      if (!fontsLoaded && !fontError) {
+        return null;
+      }
+
     const handlePasswordValidation = (value: string) => {
         const password = value;
         const passwordSpecialCharacter = /(?=.*[!@#$%^&*])/;
