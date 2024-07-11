@@ -133,7 +133,7 @@ export default function LoginScreen() {
                 </View>
             )}
 
-            <TouchableOpacity onPress={() => router.push('forgot-password')} style={{marginTop: 15}}>
+            <TouchableOpacity onPress={() => router.push('/(routes)/forgot-password')} style={{marginTop: 15}}>
                 <Text style={{fontFamily: 'Nunito_600SemiBold', fontSize: 14, textAlign: 'right', color: 'black', marginRight: 22}}>Forgot Password?</Text>
             </TouchableOpacity>
 
@@ -158,7 +158,7 @@ export default function LoginScreen() {
 
             <View style={styles.signUpRedirect}>
                 <Text style={{fontFamily: 'Nunito_400Regular', fontSize: 15, color: '#7f8c8d'}}>Don't have an account?</Text>
-                <TouchableOpacity onPress={() => router.push('/sign-up')}>
+                <TouchableOpacity onPress={() => router.push('/(routes)/sign-up')}>
                     <Text style={{fontFamily: 'Nunito_700Bold', fontSize: 14, color: '#e67e22', marginLeft: 5}}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
