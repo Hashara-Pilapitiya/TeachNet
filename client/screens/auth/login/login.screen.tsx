@@ -79,7 +79,7 @@ export default function LoginScreen() {
     const handleSignIn = () => {}
 
   return (
-    <LinearGradient colors={['#ffffff', '#f6f7f9']} style={{flex: 1}}>
+    <LinearGradient colors={['#ffffff', '#f6f7f9']} style={{flex: 1, marginTop: -25}}>
 
         <ScrollView>
             <Image source={require('../../../assets/signIn.jpg')} style={styles.signInImage} />
