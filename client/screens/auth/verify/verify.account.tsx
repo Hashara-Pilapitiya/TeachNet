@@ -35,7 +35,7 @@ export default function VerifyAccountScreen() {
 
         <View style={styles.inputContainer}>
             {code.map((_, index) => (
-              <TextInput key={index} style={styles.inputBox} keyboardType='number-pad' maxLength={1} value={code[index]} onChangeText={(text) => handleInput(text, index)} ref={inputs.current[index]} returnKeyType='done' autoFocus={index === 0} />
+              <TextInput key={index} style={styles.inputBox} keyboardType='number-pad' maxLength={1} value={code[index]} onChangeText={(text) => handleInput(text, index)} ref={inputs.current[index]} autoFocus={index === 0} />
             ))}
         </View>
 

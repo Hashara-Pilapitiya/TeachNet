@@ -7,6 +7,7 @@ import {
 } from '@expo-google-fonts/nunito'
 import { useFonts, Raleway_700Bold, Raleway_600SemiBold } from '@expo-google-fonts/raleway'
 import {
+    AntDesign,
     Entypo,
     FontAwesome,
     Fontisto,
@@ -23,6 +24,7 @@ export default function SignUpScreen() {
     const [isPasswordVisible, setIsPasswordVisible] = React.useState(false)
     const [buttonSpinner, setButtonSpinner] = React.useState(false)
     const [userInfo, setUserInfo] = React.useState({
+        name: '',
         email: '',
         password: ''
     })
@@ -81,7 +83,7 @@ export default function SignUpScreen() {
     }
 
   return (
-    <LinearGradient colors={['#ffffff', '#f6f7f9']} style={{flex: 1}}>
+    <LinearGradient colors={['#ffffff', '#f6f7f9']} style={{flex: 1, marginTop: -40}}>
 
         <ScrollView>
             <Image source={require('../../../assets/signUp.jpg')} style={styles.signInImage} />
@@ -93,8 +95,23 @@ export default function SignUpScreen() {
             <View style={styles.inputContainer}>
                 <View style={styles.input}>
 
+                    <AntDesign name='user' size={24} color='white' style={{position: 'absolute', left: 10}} />
+                    <TextInput placeholder='John Doe' style={{fontFamily: 'Nunito_700Bold', fontSize: 14, color: 'white', marginLeft: 50}} keyboardType='default' value={userInfo.name} onChangeText={(value) => setUserInfo({...userInfo, name: value})} />
+
+                    {required && (
+                        <View style={styles.errorContainer}>
+                            <Entypo name='cross' size={18} color='red' />
+                        </View>
+                    )}
+
+                </View>
+            </View>
+
+            <View style={styles.inputContainer}>
+                <View style={styles.input}>
+
                     <Fontisto name='email' size={24} color='white' style={{position: 'absolute', left: 10}} />
-                    <TextInput placeholder='Email...' style={{fontFamily: 'Nunito_700Bold', fontSize: 14, color: 'white', marginLeft: 50}} keyboardType='email-address' value={userInfo.email} onChangeText={(value) => setUserInfo({...userInfo, email: value})} />
+                    <TextInput placeholder='example@gmail.com' style={{fontFamily: 'Nunito_700Bold', fontSize: 14, color: 'white', marginLeft: 50}} keyboardType='email-address' value={userInfo.email} onChangeText={(value) => setUserInfo({...userInfo, email: value})} />
 
                     {required && (
                         <View style={styles.errorContainer}>
@@ -156,7 +173,7 @@ export default function SignUpScreen() {
 
             <View style={styles.signUpRedirect}>
                 <Text style={{fontFamily: 'Nunito_400Regular', fontSize: 15, color: '#7f8c8d'}}>Already have an account?</Text>
-                <TouchableOpacity onPress={() => router.push('/(routes)/sign-up')}>
+                <TouchableOpacity onPress={() => router.push('/(routes)/login')}>
                     <Text style={{fontFamily: 'Nunito_700Bold', fontSize: 14, color: '#e67e22', marginLeft: 5}}>Sign In</Text>
                 </TouchableOpacity>
             </View>
@@ -177,7 +194,7 @@ const styles = StyleSheet.create({
     },
 
     inputContainer: {
-        marginTop: 40,
+        marginTop: 25,
         marginHorizontal: 20,
         backgroundColor: '#3498db',
         borderRadius: 10,
@@ -225,7 +242,7 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 5,
         marginHorizontal: 20,
-        marginTop: 50
+        marginTop: 30
     },
 
     buttonTxt: {
