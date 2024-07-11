@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
         left:20,
         flexDirection: 'row',
         alignItems: 'center',
-        top: 570
+        top: 680
     },
 
     buttonContainer: {
@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 5,
         marginHorizontal: 20,
-        marginTop: 30
+        marginTop: 40
     },
 
     buttonTxt: {
