@@ -92,7 +92,7 @@ export default function LoginScreen() {
                 <View style={styles.input}>
 
                     <Fontisto name='email' size={24} color='white' style={{position: 'absolute', left: 10}} />
-                    <TextInput placeholder='Email...' style={{fontFamily: 'Nunito_700Bold', fontSize: 14, color: 'white', marginLeft: 50}} keyboardType='email-address' value={userInfo.email} onChangeText={(value) => setUserInfo({...userInfo, email: value})} />
+                    <TextInput placeholder='example@gmail.com' style={{fontFamily: 'Nunito_700Bold', fontSize: 14, color: 'white', marginLeft: 50}} keyboardType='email-address' value={userInfo.email} onChangeText={(value) => setUserInfo({...userInfo, email: value})} />
 
                     {required && (
                         <View style={styles.errorContainer}>
