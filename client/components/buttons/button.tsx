@@ -1,5 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { responsiveWidth } from 'react-native-responsive-dimensions'
 
 export default function Button({title, onPress}: {title: string, onPress: () => void}) {
   return (
@@ -14,7 +15,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#2980b9',
         padding: 12,
         borderRadius: 5,
-        marginTop: 30
+        marginTop: 30,
+        width: responsiveWidth(68)
     },
 
     buttonTxt: {

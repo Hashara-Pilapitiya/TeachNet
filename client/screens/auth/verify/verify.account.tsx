@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Button from '../../../components/buttons/button'
+import { router } from 'expo-router'
 
 export default function VerifyAccountScreen() {
 
@@ -41,6 +42,10 @@ export default function VerifyAccountScreen() {
         <View>
             <Button title='Verify Account' onPress={handleSubmit} />
         </View>
+
+        <TouchableOpacity onPress={() => router.back()}>
+            <Text style={{fontSize: 16, paddingTop: 20, fontWeight: 500}}>Go back to Sign In</Text>
+        </TouchableOpacity>
       
     </View>
   )
@@ -74,7 +79,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginTop: 50,
-        marginBottom: 20
+        marginBottom: 10
     },
 
     inputBox: {
