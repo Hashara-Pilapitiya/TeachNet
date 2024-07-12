@@ -14,7 +14,7 @@ interface IRegistrationBody {
     name: string;
     email: string;
     password: string;
-    avatar: string;
+    avatar?: string;
 }
 
 export const registerUser = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
@@ -29,8 +29,7 @@ export const registerUser = CatchAsyncError(async (req: Request, res: Response, 
         const user: IRegistrationBody = {
             name,
             email,
-            password,
-            avatar: ''
+            password
           };
 
           const activationToken = createActivationToken(user);
