@@ -9,6 +9,8 @@ import path from "path";
 import sendMail from "../utils/sendMail";
 import { accessTokenOptions, refreshTokenOptions, sendToken } from "../utils/jwt";
 import { redis } from "../utils/redis";
+import { getUserById } from "../services/user.service";
+import cloudinary from 'cloudinary';
 
 
 // A Register User
@@ -358,6 +360,41 @@ export const updatePassword = CatchAsyncError(async (req: Request, res: Response
         res.status(200).json({
             success: true,
             message: 'Password updated successfully'
+        });
+
+    } catch (error: any) {
+        return next(new ErrorHandler(error.message, 400));
+    }
+});
+
+
+
+// Update Avatar
+export const updateAvatar = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.params.id;
+        const user = await userModel. findById(userId);
+
+        if (!user) {
+            return next(new ErrorHandler(404, 'User not found'));
+        }
+
+        const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+            folder: 'avatars',
+            width: 150,
+            crop: 'scale'
+        });
+
+        user.avatar = {
+            public_id: result.public_id,
+            url: result.secure_url
+        };
+
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            user
         });
 
     } catch (error: any) {
