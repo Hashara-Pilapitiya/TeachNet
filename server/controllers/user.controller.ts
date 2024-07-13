@@ -209,6 +209,8 @@ export const updateAccessToken = CatchAsyncError(async (req: Request, res: Respo
             expiresIn: '3d'
         });
 
+        req.user = user || undefined;
+
         res.cookie('access_token', accessToken, accessTokenOptions);
 
         res.cookie('refresh_token', refreshToken, refreshTokenOptions);
@@ -277,4 +279,48 @@ export const socialAuth = CatchAsyncError(async (req: Request, res: Response, ne
         return next(new ErrorHandler(error.message, 400));
     }
 
+});
+
+
+
+
+
+// Update User Info
+interface IUpdateUserInfo {
+    name: string;
+    email: string;
+}
+
+export const updateUserInfo = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.params.id;
+        const { name, email } = req.body as IUpdateUserInfo;
+
+        const user = await userModel.findById(userId);
+
+        if (!user) {
+            return next(new ErrorHandler(404, 'User not found'));
+        }
+
+        if (email !== user.email) {
+            const isEmailExist = await userModel.findOne({ email });
+
+            if (isEmailExist) {
+                return next(new ErrorHandler(400, 'Email already exists'));
+            }
+        }
+
+        user.name = name;
+        user.email = email;
+
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            user
+        });
+
+    } catch (error: any) {
+        return next(new ErrorHandler(error.message, 400));
+    }
 });
