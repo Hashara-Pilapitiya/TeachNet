@@ -109,7 +109,7 @@ export const getSingleCourse = CatchAsyncError(async (req: Request, res: Respons
             }
 
             await redis.set(id, JSON.stringify(course));
-            
+
             res.status(200).json({
                 success: true,
                 course
@@ -138,6 +138,31 @@ export const getAllCourses = CatchAsyncError(async (req: Request, res: Response,
             courses
         });
 
+    } catch (error: any) {
+        return next(new ErrorHandler(error.message, 500));
+    }
+});
+
+
+
+
+// Get Course Content for only valid users
+export const getCourseByUser = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        
+            const { id } = req.params;
+
+            const course = await CourseModel.findById(id);
+
+            if (!course) {
+                return next(new ErrorHandler(404, "Course not found"));
+            }
+
+            res.status(200).json({
+                success: true,
+                course
+            });
+       
     } catch (error: any) {
         return next(new ErrorHandler(error.message, 500));
     }
