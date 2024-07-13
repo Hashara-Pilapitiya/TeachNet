@@ -101,3 +101,25 @@ export const getSingleCourse = CatchAsyncError(async (req: Request, res: Respons
         return next(new ErrorHandler(error.message, 500));
     }
 });
+
+
+
+
+// Get All Courses - with purchasing
+export const getAllCourses = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const courses = await CourseModel.find().select('-courseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links');
+
+        if (!courses) {
+            return next(new ErrorHandler(404, "Courses not found"));
+        }
+
+        res.status(200).json({
+            success: true,
+            courses
+        });
+
+    } catch (error: any) {
+        return next(new ErrorHandler(error.message, 500));
+    }
+});
