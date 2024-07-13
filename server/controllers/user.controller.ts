@@ -324,3 +324,47 @@ export const updateUserInfo = CatchAsyncError(async (req: Request, res: Response
         return next(new ErrorHandler(error.message, 400));
     }
 });
+
+
+
+
+// Update Password
+interface IUpdatePassword {
+    oldPassword: string;
+    newPassword: string;
+}
+
+export const updatePassword = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.params.id;
+        const { oldPassword, newPassword } = req.body as IUpdatePassword;
+
+        const user = await userModel.findById(userId).select('+password');
+
+        if (!user) {
+            return next(new ErrorHandler(404, 'User not found'));
+        }
+
+        const isPasswordMatched = await user.comparePassword(oldPassword);
+
+        if (!isPasswordMatched) {
+            return next(new ErrorHandler(400, 'Old password is incorrect'));
+        }
+
+        user.password = newPassword;
+
+        await user.save();
+
+        res.status(200).json({
+            success: true,
+            message: 'Password updated successfully'
+        });
+
+    } catch (error: any) {
+        return next(new ErrorHandler(error.message, 400));
+    }
+});
+
+
+
+
