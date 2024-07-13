@@ -1,6 +1,6 @@
 import express from 'express';
-import { activateUser, loginUser, logoutUser, registerUser, updateAccessToken } from '../controllers/user.controller';
-//import { authorizeRoles, isAuthenticated } from '../middleware/auth';
+import { activateUser, getUserInfo, loginUser, logoutUser, registerUser, updateAccessToken } from '../controllers/user.controller';
+import e from 'express';
 
 const userRouter = express.Router();
 
@@ -13,5 +13,7 @@ userRouter.post('/login', loginUser);
 userRouter.get('/logout', logoutUser);
 
 userRouter.get('/refresh', updateAccessToken);
+
+userRouter.get('/:id', getUserInfo);
 
 export default userRouter;
