@@ -9,7 +9,7 @@ import path from "path";
 import sendMail from "../utils/sendMail";
 import { accessTokenOptions, refreshTokenOptions, sendToken } from "../utils/jwt";
 import { redis } from "../utils/redis";
-import { getAllUsersService, getUserById } from "../services/user.service";
+import { getAllUsersService, getUserById, updateUserRoleService } from "../services/user.service";
 import cloudinary from 'cloudinary';
 
 
@@ -409,6 +409,27 @@ export const getAllUsers = async (req: Request, res: Response, next: NextFunctio
     try {
 
         getAllUsersService(res);
+
+    } catch (error: any) {
+        return next(new ErrorHandler(error.message, 400));
+    }
+};
+
+
+
+// Update User Role
+export const updateUserRole = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.params.id;
+        const { role } = req.body;
+
+        const user = await userModel.findById(userId);
+
+        if (!user) {
+            return next(new ErrorHandler(404, 'User not found'));
+        }
+
+        updateUserRoleService(userId, role, res);
 
     } catch (error: any) {
         return next(new ErrorHandler(error.message, 400));
