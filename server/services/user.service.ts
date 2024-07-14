@@ -10,3 +10,14 @@ export const getUserById = async (id: string, res: Response) => {
         user
     });
 }
+
+
+// Get all users
+export const getAllUsersService = async (res: Response) => {
+    const users = await userModel.find().sort({ createdAt: -1 });
+
+    res.status(200).json({
+        success: true,
+        users
+    });
+}

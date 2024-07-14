@@ -1,5 +1,5 @@
 import express from 'express';
-import { activateUser, getUserInfo, loginUser, logoutUser, registerUser, socialAuth, updateAccessToken, updateAvatar, updatePassword, updateUserInfo } from '../controllers/user.controller';
+import { activateUser, getAllUsers, getUserInfo, loginUser, logoutUser, registerUser, socialAuth, updateAccessToken, updateAvatar, updatePassword, updateUserInfo } from '../controllers/user.controller';
 
 const userRouter = express.Router();
 
@@ -22,5 +22,7 @@ userRouter.put('/update/:id', updateUserInfo);
 userRouter.put('/update-password/:id', updatePassword);
 
 userRouter.put('/update-avatar/:id', updateAvatar);
+
+userRouter.get('/get-users/all', getAllUsers);
 
 export default userRouter;
