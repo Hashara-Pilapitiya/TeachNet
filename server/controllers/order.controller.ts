@@ -81,7 +81,7 @@ export const createOrder = CatchAsyncError(async (req: Request, res: Response, n
             res.status(200).json({
                 success: true,
                 message: "Order created successfully",
-                order: data
+                order: course
             });
 
     } catch (error: any) {
