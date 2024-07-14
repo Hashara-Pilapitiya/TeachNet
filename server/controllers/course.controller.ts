@@ -337,3 +337,53 @@ export const addReview = CatchAsyncError(async (req: Request, res: Response, nex
         return next(new ErrorHandler(error.message, 500));
     }
 });
+
+
+
+
+// Add reply to review
+interface IAddReplyToReviewData {
+    comment: string;
+    reviewId: string;
+    courseId: string;
+}
+
+export const addReplyToReview = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { comment, reviewId, courseId }: IAddReplyToReviewData = req.body;
+
+        const course = await CourseModel.findById(courseId);
+
+        if (!course) {
+            return next(new ErrorHandler(404, "Course not found"));
+        }
+
+        const review = course?.reviews?.find((item: any) => item._id.equals(reviewId));
+
+        if (!review) {
+            return next(new ErrorHandler(404, "Review not found"));
+        }
+
+        const replyData: any = {
+            comment,
+            user: req.user
+        }
+
+        if (!review.commentReplies) {
+            review.commentReplies = [];
+        }
+
+        review.commentReplies?.push(replyData);
+
+        await course?.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Reply added successfully"
+        });
+        
+    } catch (error: any) {
+        return next(new ErrorHandler(error.message, 500));
+    }
+});
+
