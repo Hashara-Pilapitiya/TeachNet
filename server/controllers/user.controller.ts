@@ -437,3 +437,28 @@ export const updateUserRole = async (req: Request, res: Response, next: NextFunc
 };
 
 
+
+// Delete User
+export const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const userId = req.params.id;
+
+        const user = await userModel.findById(userId);
+
+        if (!user) {
+            return next(new ErrorHandler(404, 'User not found'));
+        }
+
+        await user.deleteOne({ _id: userId });
+
+        res.status(200).json({
+            success: true,
+            message: 'User deleted successfully'
+        });
+
+    } catch (error: any) {
+        return next(new ErrorHandler(error.message, 400));
+    }
+};
+
+

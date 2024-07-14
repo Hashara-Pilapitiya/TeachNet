@@ -1,5 +1,5 @@
 import express from 'express';
-import { activateUser, getAllUsers, getUserInfo, loginUser, logoutUser, registerUser, socialAuth, updateAccessToken, updateAvatar, updatePassword, updateUserInfo, updateUserRole } from '../controllers/user.controller';
+import { activateUser, deleteUser, getAllUsers, getUserInfo, loginUser, logoutUser, registerUser, socialAuth, updateAccessToken, updateAvatar, updatePassword, updateUserInfo, updateUserRole } from '../controllers/user.controller';
 
 const userRouter = express.Router();
 
@@ -26,5 +26,7 @@ userRouter.put('/update-avatar/:id', updateAvatar);
 userRouter.get('/get-users/all', getAllUsers);
 
 userRouter.put('/update-user-role/:id', updateUserRole);
+
+userRouter.delete('/delete-user/:id', deleteUser);
 
 export default userRouter;
