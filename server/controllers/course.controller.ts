@@ -413,3 +413,28 @@ export const getCourses = async (req: Request, res: Response, next: NextFunction
     }
 };
 
+
+
+// Delete Course
+export const deleteCourse = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const courseId = req.params.id;
+
+        const course = await CourseModel.findById(courseId);
+
+        if (!course) {
+            return next(new ErrorHandler(404, 'Course not found'));
+        }
+
+        await course.deleteOne({ _id: courseId });
+
+        res.status(200).json({
+            success: true,
+            message: 'Course deleted successfully'
+        });
+
+    } catch (error: any) {
+        return next(new ErrorHandler(error.message, 400));
+    }
+};
+
