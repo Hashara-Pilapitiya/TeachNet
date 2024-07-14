@@ -10,6 +10,7 @@ import { title } from "process";
 import ejs from "ejs";
 import path from "path";
 import sendMail from "../utils/sendMail";
+import NotificationModel from "../models/notification.model";
 
 
 // Upload Course
@@ -209,6 +210,12 @@ export const addQuestion = CatchAsyncError(async (req: Request, res: Response, n
         // Add question to course content
         courseContent.questions.push(newQuestion);
 
+        await NotificationModel.create({
+            user: req.user?._id,
+            title: "New Question Received",
+            message: `You have a new question on ${courseContent.title}`
+        });
+
         // Save course
         await course?.save();
 
@@ -271,6 +278,12 @@ export const addReply = CatchAsyncError(async (req: Request, res: Response, next
 
         // Save course
         await course?.save();
+
+        await NotificationModel.create({
+            user: req.user?._id,
+            title: "New Reply Received",
+            message: `You have a new reply on ${courseContent.title}`
+        });
 
         res.status(200).json({
             success: true,
