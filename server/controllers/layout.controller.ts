@@ -51,7 +51,13 @@ export const createLayout = CatchAsyncError(async (req: Request, res: Response, 
         if (type == "Categories") {
             const { categories } = req.body;
 
-            await LayoutModel.create(categories);
+            const categoryItem = await Promise.all(categories.map(async (item: any) => {
+                return {
+                    title: item.title
+                }
+            }));
+
+            await LayoutModel.create({ categories: categoryItem, type: "Categories" });
         }
 
         res.status(200).json({
