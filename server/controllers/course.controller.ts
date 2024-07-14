@@ -6,6 +6,10 @@ import { createCourse } from "../services/course.service";
 import CourseModel from "../models/course.model";
 import { redis } from "../utils/redis";
 import mongoose from "mongoose";
+import { title } from "process";
+import ejs from "ejs";
+import path from "path";
+import sendMail from "../utils/sendMail";
 
 
 // Upload Course
@@ -216,5 +220,66 @@ export const addQuestion = CatchAsyncError(async (req: Request, res: Response, n
 
     } catch (error: any) {
         return next(new ErrorHandler(error.message, 500));
+    }
+});
+
+
+
+
+// Add Reply to Question
+interface IAddReplyData {
+    answer: string;
+    courseId: string;
+    contentId: string;
+    questionId: string;
+}
+
+export const addReply = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { answer, courseId, contentId, questionId }: IAddReplyData = req.body;
+
+        const course = await CourseModel.findById(courseId);
+
+        if (!mongoose.Types.ObjectId.isValid(contentId)) {
+            return next(new ErrorHandler(400, "Invalid Content ID"));
+        }
+
+        const courseContent = course?.courseData.find((item: any) => item._id.equals(contentId));
+
+        if (!courseContent) {
+            return next(new ErrorHandler(404, "Content not found"));
+        }
+
+        const question = courseContent.questions.find((item: any) => item._id.equals(questionId));
+
+        if (!question) {
+            return next(new ErrorHandler(404, "Question not found"));
+        }
+
+        // Create new reply
+        const newReply: any = {
+            answer,
+            user: req.user
+        }
+
+        // Add reply to question
+        if (question.questionReplies) {
+            question.questionReplies.push(newReply);
+        } else {
+            question.questionReplies = [newReply];
+        }
+
+        // Save course
+        await course?.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Reply added successfully"
+        });
+
+        
+
+    } catch (error: any) {
+        return next(new ErrorHandler(500, 'eee'));
     }
 });
