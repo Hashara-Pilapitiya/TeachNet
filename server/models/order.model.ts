@@ -13,8 +13,7 @@ const orderSchema = new Schema<IOrder>({
         required: true
     },
     userId: { 
-        type: String,
-        required: true
+        type: String
      },
     payment_info: { type: Object }
 }, {
