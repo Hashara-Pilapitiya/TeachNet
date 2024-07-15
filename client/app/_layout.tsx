@@ -8,6 +8,7 @@ import { View } from 'react-native';
 import React from 'react';
 import OnBoarding from './(routes)/onboarding';
 import { Stack } from 'expo-router';
+import { ToastProvider } from 'react-native-toast-notifications';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -47,7 +48,7 @@ function RootLayoutNav() {
 
   return (
     
-    <>
+    <ToastProvider>
 
       {isLoggedIn ? (
         <View></View>
@@ -62,7 +63,7 @@ function RootLayoutNav() {
 
       )}
 
-    </>
+    </ToastProvider>
     
   );
 }
