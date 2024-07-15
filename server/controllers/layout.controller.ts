@@ -142,3 +142,27 @@ export const editLayout = CatchAsyncError(async (req: Request, res: Response, ne
         next(new ErrorHandler(error.message, 500));
     }
 });
+
+
+
+
+// Get Layout by type
+export const getLayoutByType = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { type } = req.body;
+
+        const layout = await LayoutModel.findOne({ type });
+
+        if (!layout) {
+            return next(new ErrorHandler(400, "Layout not found"));
+        }
+
+        res.status(200).json({
+            success: true,
+            layout
+        });
+
+    } catch (error: any) {
+        next(new ErrorHandler(error.message, 500));
+    }
+});
