@@ -94,7 +94,7 @@ interface IAcrivationRequest {
 
 export const activateUser = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { activation_code, activation_token } = req.body as IAcrivationRequest;
+        const { activation_token, activation_code } = req.body as IAcrivationRequest;
 
         const newUser: {user: IUser, activationCode: string} = jwt.verify(activation_token, process.env.ACTIVATION_SECRET as Secret) as {user: IUser, activationCode: string};
 

@@ -82,7 +82,7 @@ export default function SignUpScreen() {
         }
     }
 
-    const handleSignUp = async() => {
+    const handleSignIn = async() => {
 
         await axios.post(`${SERVER_URI}/register`, {
             name: userInfo.name, 
@@ -179,7 +179,7 @@ export default function SignUpScreen() {
                 </View>
             )}
 
-            <TouchableOpacity style={styles.buttonContainer} onPress={handleSignUp} >
+            <TouchableOpacity style={styles.buttonContainer} onPress={handleSignIn} >
                 {
                     buttonSpinner ? (
                         <ActivityIndicator size='small' color='#ecf0f1' style={{marginTop: 10}} />

@@ -2,6 +2,10 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-nativ
 import React from 'react'
 import Button from '../../../components/buttons/button'
 import { router } from 'expo-router'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import axios from 'axios'
+import { SERVER_URI } from '../../../utils/uri'
+import { Toast } from 'react-native-toast-notifications'
 
 export default function VerifyAccountScreen() {
 
@@ -23,8 +27,29 @@ export default function VerifyAccountScreen() {
         }
     }
 
-    const handleSubmit = () => {
-        
+    const handleSumbit = async() => {
+        const otp = code.join("")
+
+        const activation_token = await AsyncStorage.getItem("activation_token")
+
+        await axios
+            .post(`${SERVER_URI}/activate-user`, {
+                activation_token,
+                activation_code: otp
+            })
+            .then((res: any) => {
+                Toast.show("Your account activated successfully!", {
+                    type: "success"
+                })
+
+                setCode(new Array(4).fill(''))
+                router.push('/(routes)/login')
+            })
+            .catch((error) => {
+                Toast.show("Your OTP is not valid or expired!", {
+                    type: "danger"
+                })
+            })
     }
 
   return (
@@ -40,7 +65,7 @@ export default function VerifyAccountScreen() {
         </View>
 
         <View>
-            <Button title='Verify Account' onPress={handleSubmit} />
+            <Button title='Submit' onPress={handleSumbit} />
         </View>
 
         <TouchableOpacity onPress={() => router.back()}>
